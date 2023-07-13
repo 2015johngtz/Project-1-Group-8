@@ -6,7 +6,7 @@ searchForm.addEventListener('submit', async function (event) {
   event.preventDefault();
   const zipCode = searchInput.value.trim();
   if (zipCode !== '') {
-    const url = `https://crime-data-by-zipcode-api.p.rapidapi.com/crime_data?zip=${78572}`;
+    const url = `https://crime-data-by-zipcode-api.p.rapidapi.com/crime_data?zip=${zipCode}`;
     const options = {
       method: 'GET',
       headers: {
@@ -18,12 +18,19 @@ searchForm.addEventListener('submit', async function (event) {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      // Process and display the crime rate result
-      console.log(result);
+      displayResults(result);
     } catch (error) {
       console.error(error);
     }
   }
 });
 
-// test
+function displayResults(result) {
+  // Clear previous results
+  resultsContainer.innerHTML = '';
+
+  // Create a new result element and append it to the results container
+  const resultElement = document.createElement('div');
+  resultElement.textContent = JSON.stringify(result);
+  resultsContainer.appendChild(resultElement);
+}
