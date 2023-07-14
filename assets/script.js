@@ -1,11 +1,20 @@
+
+
+
+
+
+
 const searchForm = document.getElementById('searchForm');
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
+const url2 = `https://crime-data-by-zipcode-api.p.rapidapi.com/crime_data?zip=94109`;
 
 searchForm.addEventListener('submit', async function (event) {
   event.preventDefault();
+
   const zipCode = searchInput.value.trim();
   if (zipCode !== '') {
+
     const url = `https://crime-data-by-zipcode-api.p.rapidapi.com/crime_data?zip=${zipCode}`;
     const options = {
       method: 'GET',
@@ -34,3 +43,39 @@ function displayResults(result) {
   resultElement.textContent = JSON.stringify(result);
   resultsContainer.appendChild(resultElement);
 }
+
+
+
+
+fetch('https://crime-data-by-zipcode-api.p.rapidapi.com/crime_data?zip=94109', {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': 'f9b4c84174msh8852b12314d057ep131096jsn6e0e230da9c4',
+    'X-RapidAPI-Host': 'crime-data-by-zipcode-api.p.rapidapi.com'
+  },
+  // credentials: 'same-origin',
+  // redirect: 'follow',
+})
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  });
+
+
+fetch('https://airbnb-listings.p.rapidapi.com/v2/getadmins?countrycode=IT&admin1=07&admin2=RM&admin3=058091&admin4=05809101', {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': 'f9b4c84174msh8852b12314d057ep131096jsn6e0e230da9c4',
+    'X-RapidAPI-Host': 'airbnb-listings.p.rapidapi.com'
+  },
+  // credentials: 'same-origin',
+  // redirect: 'follow',
+})
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  });
