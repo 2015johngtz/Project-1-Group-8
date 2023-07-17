@@ -48,6 +48,7 @@ function displayResults(crimeDataResult, zillowDataResult) {
   resultElement.textContent = ' Crime ' + JSON.stringify(crimeDataResult.Overall.Fact + ' ' + crimeDataResult.Overall["Risk Detail"] + ' ' + ' Crime Grade' + ' ' + crimeDataResult.Overall["Overall Crime Grade"]);
   // ', Address: ' + zillowDataResult.searchResultsData[i].address;
   resultsContainer.appendChild(resultElement);
+  zillowContainer.innerHTML = '';
   for (let i = 0; i < zillowDataResult.searchResultsData.length; i++) {
     var resultZillowElement = document.createElement('li');
     resultZillowElement.textContent = 'Zillow' + JSON.stringify(zillowDataResult.searchResultsData[i].address + ' ' + zillowDataResult.searchResultsData[i].price);
