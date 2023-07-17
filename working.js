@@ -1,3 +1,11 @@
+
+// local storage needs done still
+
+
+
+
+
+
 var searchForm = document.getElementById('searchForm');
 var searchInput = document.getElementById('searchInput');
 var resultsContainer = document.getElementById('results');
@@ -45,14 +53,19 @@ function displayResults(crimeDataResult, zillowDataResult) {
   // crimeDataElement.textContent = 'Crime Data: ' + JSON.stringify(crimeDataResult.Overall.Fact,);
   // resultsContainer.appendChild(crimeDataElement);
   var resultElement = document.createElement('li');
-  resultElement.textContent = ' Crime ' + JSON.stringify(crimeDataResult.Overall.Fact + ' ' + crimeDataResult.Overall["Risk Detail"] + ' ' + ' Crime Grade' + ' ' + crimeDataResult.Overall["Overall Crime Grade"]);
+  resultElement.textContent = ' Did You Know ? ' + JSON.stringify(crimeDataResult.Overall.Fact + ' ' +
+    + ' ' + crimeDataResult.Overall["Risk Detail"] + ' ' + ' Crime Grade' + ' ' + crimeDataResult.Overall["Overall Crime Grade"]);
   // ', Address: ' + zillowDataResult.searchResultsData[i].address;
   resultsContainer.appendChild(resultElement);
   for (let i = 0; i < zillowDataResult.searchResultsData.length; i++) {
     var resultZillowElement = document.createElement('li');
-    resultZillowElement.textContent = 'Zillow' + JSON.stringify(zillowDataResult.searchResultsData[i].address + ' ' + zillowDataResult.searchResultsData[i].price);
+    resultZillowElement.textContent = ' For Sale Near You ' + JSON.stringify(zillowDataResult.searchResultsData[i].address + ' ' + zillowDataResult.searchResultsData[i].price);
     zillowContainer.appendChild(resultZillowElement);
   }
 }
 
+
+//TODO LOCAL STORAGE
+
+// LOCAL STORAGE VARIABLES
 
