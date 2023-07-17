@@ -45,7 +45,7 @@ function displayResults(crimeDataResult, zillowDataResult) {
   // crimeDataElement.textContent = 'Crime Data: ' + JSON.stringify(crimeDataResult.Overall.Fact,);
   // resultsContainer.appendChild(crimeDataElement);
   var resultElement = document.createElement('li');
-  resultElement.textContent = ' Crime ' + JSON.stringify(crimeDataResult.Overall.Fact + crimeDataResult.Overall["Risk Detail"] + crimeDataResult.Overall["Overall Crime Grade"]);
+  resultElement.textContent = ' Crime ' + JSON.stringify(crimeDataResult.Overall.Fact + ' ' + crimeDataResult.Overall["Risk Detail"] + ' ' + ' Crime Grade' + ' ' + crimeDataResult.Overall["Overall Crime Grade"]);
   // ', Address: ' + zillowDataResult.searchResultsData[i].address;
   resultsContainer.appendChild(resultElement);
   for (let i = 0; i < zillowDataResult.searchResultsData.length; i++) {
@@ -54,16 +54,5 @@ function displayResults(crimeDataResult, zillowDataResult) {
     zillowContainer.appendChild(resultZillowElement);
   }
 }
-  
-  
-  
-  
-  // const crimeDataElement = document.createElement('li');
-  // crimeDataElement.textContent = 'Crime Data: ' + JSON.stringify(crimeData);
-  // resultsContainer.appendChild(crimeDataElement);
 
-  // Create a new result element for zillow data and append it to the results container
-  // const zillowDataElement = document.createElement('li');
-  // zillowDataElement.textContent = 'Zillow Data: ' + JSON.stringify(zillowData);
-  // zillowResultsCont.appendChild(zillowDataElement);
 
