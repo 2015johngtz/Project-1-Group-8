@@ -1,11 +1,4 @@
 
-// local storage needs done still
-
-
-
-
-
-
 var searchForm = document.getElementById('searchForm');
 var searchInput = document.getElementById('searchInput');
 var resultsContainer = document.getElementById('results');
@@ -100,13 +93,4 @@ function displaySearchedZipCodes() {
 var searchedZipCodes = retrieveSearchedZipCodes();
 displaySearchedZipCodes();
 
-
-
-
-
-
-
-//TODO LOCAL STORAGE
-
-// LOCAL STORAGE VARIABLES
 
