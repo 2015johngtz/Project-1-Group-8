@@ -2,7 +2,7 @@
 var searchForm = document.getElementById('searchForm');
 var searchInput = document.getElementById('searchInput');
 var resultsContainer = document.getElementById('results');
-var zillowContainer = document.getElementById('zillow');
+var zillowContainer = document.getElementById('listing-info');
 var searchedZipCodes = [];
 var searchedZipCodes = retrieveSearchedZipCodes();
 
@@ -85,7 +85,7 @@ function displaySearchedZipCodes() {
   var zipCodesContainer = document.getElementById('zipCodes');
   zipCodesContainer.innerHTML = '';
   searchedZipCodes.forEach(function (zipCode) {
-    var zipCodeElement = document.createElement('li');
+    var zipCodeElement = document.createElement('a');
     zipCodeElement.textContent = zipCode;
     zipCodesContainer.appendChild(zipCodeElement);
   });
