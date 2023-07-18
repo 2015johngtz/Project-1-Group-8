@@ -6,9 +6,6 @@ var zillowContainer = document.getElementById('listing-info');
 var searchedZipCodes = [];
 var searchedZipCodes = retrieveSearchedZipCodes();
 
-
-
-
 searchForm.addEventListener('submit', async function (event) {
   event.preventDefault();
   var zipCode = searchInput.value.trim();
@@ -50,24 +47,17 @@ searchForm.addEventListener('submit', async function (event) {
 function displayResults(crimeDataResult, zillowDataResult) {
   resultsContainer.innerHTML = '';
   console.log(crimeDataResult);
-  // console.log(zillowDataResults.address);
-  // var crimeDataElement = document.createElement('div');
-  // crimeDataElement.textContent = 'Crime Data: ' + JSON.stringify(crimeDataResult.Overall.Fact,);
-  // resultsContainer.appendChild(crimeDataElement);
+
   var resultElement = document.createElement('li');
   resultElement.textContent = ' Did You Know ? ' + JSON.stringify(crimeDataResult.Overall.Fact + ' ' +
     + ' ' + crimeDataResult.Overall["Risk Detail"] + ' ' + ' Crime Grade' + ' ' + crimeDataResult.Overall["Overall Crime Grade"]);
-  // ', Address: ' + zillowDataResult.searchResultsData[i].address;
-  resultsContainer.appendChild(resultElement);
-  zillowContainer.innerHTML = '';
+    resultsContainer.appendChild(resultElement);
+    zillowContainer.innerHTML = '';
   for (let i = 0; i < zillowDataResult.searchResultsData.length; i++) {
     var resultZillowElement = document.createElement('li');
     resultZillowElement.textContent = ' For Sale Near You ' + JSON.stringify(zillowDataResult.searchResultsData[i].address + ' ' + zillowDataResult.searchResultsData[i].price);
     zillowContainer.appendChild(resultZillowElement);
   }
-
-
-
 }
 // Functions to store and receive our saved zipcodes into local storage and then display them on our page
 function savedZipCodes() {
@@ -85,7 +75,7 @@ function displaySearchedZipCodes() {
   var zipCodesContainer = document.getElementById('zipCodes');
   zipCodesContainer.innerHTML = '';
   searchedZipCodes.forEach(function (zipCode) {
-    var zipCodeElement = document.createElement('a');
+    var zipCodeElement = document.createElement('li');
     zipCodeElement.textContent = zipCode;
     zipCodesContainer.appendChild(zipCodeElement);
   });
