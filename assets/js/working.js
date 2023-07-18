@@ -53,11 +53,13 @@ function displayResults(crimeDataResult, zillowDataResult) {
     + ' ' + crimeDataResult.Overall["Risk Detail"] + ' ' + ' Crime Grade' + ' ' + crimeDataResult.Overall["Overall Crime Grade"]);
     resultsContainer.appendChild(resultElement);
     zillowContainer.innerHTML = '';
-  for (let i = 0; i < zillowDataResult.searchResultsData.length; i++) {
+  for (let i = 0; i < 5; i++) {
     var resultZillowElement = document.createElement('li');
     resultZillowElement.textContent = ' For Sale Near You ' + JSON.stringify(zillowDataResult.searchResultsData[i].address + ' ' + zillowDataResult.searchResultsData[i].price);
     zillowContainer.appendChild(resultZillowElement);
   }
+  console.log(crimeDataResult.Overall)
+
 }
 // Functions to store and receive our saved zipcodes into local storage and then display them on our page
 function savedZipCodes() {
@@ -75,9 +77,11 @@ function displaySearchedZipCodes() {
   var zipCodesContainer = document.getElementById('zipCodes');
   zipCodesContainer.innerHTML = '';
   searchedZipCodes.forEach(function (zipCode) {
-    var zipCodeElement = document.createElement('li');
+    var zipCodeElement = document.createElement('a');
+    zipCodeElement.setAttribute("class", "zipblock")
     zipCodeElement.textContent = zipCode;
     zipCodesContainer.appendChild(zipCodeElement);
+
   });
 }
 var searchedZipCodes = retrieveSearchedZipCodes();
