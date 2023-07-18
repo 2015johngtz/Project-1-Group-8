@@ -10,11 +10,20 @@ var searchForm = document.getElementById('searchForm');
 var searchInput = document.getElementById('searchInput');
 var resultsContainer = document.getElementById('results');
 var zillowContainer = document.getElementById('zillow');
+var searchedZipCodes = [];
+var searchedZipCodes = retrieveSearchedZipCodes();
+
+
+
 
 searchForm.addEventListener('submit', async function (event) {
   event.preventDefault();
   var zipCode = searchInput.value.trim();
   if (zipCode !== '') {
+    searchedZipCodes.push(zipCode);
+    savedZipCodes();
+    displaySearchedZipCodes();
+
     var crimeDataUrl = `https://crime-data-by-zipcode-api.p.rapidapi.com/crime_data?zip=${zipCode}`;
     var zillowDataUrl = `https://zillow-base1.p.rapidapi.com/WebAPIs/zillow/search?location=${zipCode}&page=1&sort_by=Homes_For_You`;
     var crimeDataOptions = {
@@ -63,16 +72,39 @@ function displayResults(crimeDataResult, zillowDataResult) {
     resultZillowElement.textContent = ' For Sale Near You ' + JSON.stringify(zillowDataResult.searchResultsData[i].address + ' ' + zillowDataResult.searchResultsData[i].price);
     zillowContainer.appendChild(resultZillowElement);
   }
+
+
+
+}
+// Functions to store and receive our saved zipcodes into local storage and then display them on our page
+function savedZipCodes() {
+  localStorage.setItem(' Searched ZipCodes', JSON.stringify(searchedZipCodes));
 }
 
-// function readHistory() {
-//   var searchInput = localStorage.getItem('zipcodes');
-//   if (searchInput) {
-//     searchInput = JSON.parse(searchInput);
-//   } else {
-//     searchInput = [];
-//   }
-// }
+function retrieveSearchedZipCodes() {
+  var savedZipCodes = localStorage.getItem('searchedZipCodes');
+  if (savedZipCodes) {
+    return JSON.parse(savedZipCodes);
+  }
+  return [];
+}
+function displaySearchedZipCodes() {
+  var zipCodesContainer = document.getElementById('zipCodes');
+  zipCodesContainer.innerHTML = '';
+  searchedZipCodes.forEach(function (zipCode) {
+    var zipCodeElement = document.createElement('li');
+    zipCodeElement.textContent = zipCode;
+    zipCodesContainer.appendChild(zipCodeElement);
+  });
+}
+var searchedZipCodes = retrieveSearchedZipCodes();
+displaySearchedZipCodes();
+
+
+
+
+
+
 
 //TODO LOCAL STORAGE
 
