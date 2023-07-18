@@ -54,8 +54,30 @@ function displayResults(crimeDataResult, zillowDataResult) {
     resultsContainer.appendChild(resultElement);
     zillowContainer.innerHTML = '';
   for (let i = 0; i < 5; i++) {
-    var resultZillowElement = document.createElement('li');
-    resultZillowElement.textContent = ' For Sale Near You ' + JSON.stringify(zillowDataResult.searchResultsData[i].address + ' ' + zillowDataResult.searchResultsData[i].price);
+    var resultZillowElement = document.createElement('div');
+    resultZillowElement.classList.add("result")
+    resultZillowElement.innerHTML = `
+    <div class="card is-one-third my-4">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img src=${zillowDataResult.searchResultsData[i].imgSrc} alt="Placeholder image">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+    <div class="media-content">
+    <p class="title is-4">${zillowDataResult.searchResultsData[i].address}</p>
+    <p class="subtitle is-6">${zillowDataResult.searchResultsData[i].price}</p>
+    </div>
+    </div>
+
+    <div class="content">
+      <a href=${zillowDataResult.searchResultsData[i].detailUrl}><button class="button is-info" >Zillow</button></a>
+      <br>
+    </div>
+  </div>
+</div>` 
+    // resultZillowElement.textContent = ' For Sale Near You ' + JSON.stringify( + ' ' + zillowDataResult.searchResultsData[i].price);
     zillowContainer.appendChild(resultZillowElement);
   }
   console.log(crimeDataResult.Overall)
@@ -87,4 +109,9 @@ function displaySearchedZipCodes() {
 var searchedZipCodes = retrieveSearchedZipCodes();
 displaySearchedZipCodes();
 
+    // <div class="media-left">
+    //   <figure class="image is-48x48">
+    //     <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+    //   </figure>
+    // </div>
 
