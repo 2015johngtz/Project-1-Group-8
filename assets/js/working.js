@@ -53,13 +53,13 @@ function displayResults(crimeDataResult, zillowDataResult) {
     + ' ' + crimeDataResult.Overall["Risk Detail"] + ' ' + ' Crime Grade' + ' ' + crimeDataResult.Overall["Overall Crime Grade"]);
     resultsContainer.appendChild(resultElement);
     zillowContainer.innerHTML = '';
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     var resultZillowElement = document.createElement('div');
     resultZillowElement.classList.add("result")
     resultZillowElement.innerHTML = `
-    <div class="card is-one-third my-4">
-  <div class="card-image">
-    <figure class="image is-4by3">
+    <div class="results-card card my-4 mx-1 column">
+  <div class="card-image image is-3by2">
+    <figure>
       <img src=${zillowDataResult.searchResultsData[i].imgSrc} alt="Placeholder image">
     </figure>
   </div>
@@ -85,7 +85,7 @@ function displayResults(crimeDataResult, zillowDataResult) {
 }
 // Functions to store and receive our saved zipcodes into local storage and then display them on our page
 function savedZipCodes() {
-  localStorage.setItem(' Searched ZipCodes', JSON.stringify(searchedZipCodes));
+  localStorage.setItem('Searched ZipCodes', JSON.stringify(searchedZipCodes));
 }
 
 function retrieveSearchedZipCodes() {
@@ -99,10 +99,42 @@ function displaySearchedZipCodes() {
   var zipCodesContainer = document.getElementById('zipCodes');
   zipCodesContainer.innerHTML = '';
   searchedZipCodes.forEach(function (zipCode) {
-    var zipCodeElement = document.createElement('a');
+    var zipCodeElement = document.createElement('li');
     zipCodeElement.setAttribute("class", "zipblock")
     zipCodeElement.textContent = zipCode;
     zipCodesContainer.appendChild(zipCodeElement);
+    zipCodeElement.classList.add("cursor-point")
+    zipCodeElement.addEventListener("click", async function(event){
+      var zipCode = event.target.textContent;
+      var crimeDataUrl = `https://crime-data-by-zipcode-api.p.rapidapi.com/crime_data?zip=${zipCode}`;
+    var zillowDataUrl = `https://zillow-base1.p.rapidapi.com/WebAPIs/zillow/search?location=${zipCode}&page=1&sort_by=Homes_For_You`;
+    var crimeDataOptions = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'da0c78ec3fmshc1b51465e907877p1fba6cjsna9f869b31242',
+        'X-RapidAPI-Host': 'crime-data-by-zipcode-api.p.rapidapi.com'
+      }
+    };
+    var zillowDataOptions = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'af1056a4e5msh34f0784edc75082p12e317jsn60856b7a51a9',
+        'X-RapidAPI-Host': 'zillow-base1.p.rapidapi.com'
+      }
+    };
+    try {
+      var [crimeDataResponse, zillowDataResponse] = await Promise.all([
+        fetch(crimeDataUrl, crimeDataOptions),
+        fetch(zillowDataUrl, zillowDataOptions)
+      ]);
+      var crimeDataResult = await crimeDataResponse.json();
+      var zillowDataResult = await zillowDataResponse.json();
+      console.log(zillowDataResult.searchResultsData[0])
+      displayResults(crimeDataResult, zillowDataResult);
+    } catch (error) {
+      console.error(error);
+    }
+    })
 
   });
 }

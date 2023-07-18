@@ -17,6 +17,15 @@ body {
   background-position: fixed;
 }
 
+.results-card {
+  height: 500px;
+  width: 500px;
+}
+
+.cursor-point{
+  cursor: pointer;
+}
+
 .pabout{
   font-size: 20px;
   padding-left: 20px;
@@ -97,7 +106,8 @@ body {
 }
 
 .topnav .search-container button:hover {
-  background: #12098a;
+  background: #2196f3;
+  color: white;
 }
 
 @media screen and (max-width: 600px) {
