@@ -1,7 +1,7 @@
 var searchForm = document.getElementById('searchForm');
 var searchInput = document.getElementById('searchInput');
 var resultsContainer = document.getElementById('results');
-var zillowContainer = document.getElementById('zillow')
+var zillowContainer = document.getElementById('zillow');
 
 searchForm.addEventListener('submit', async function (event) {
   event.preventDefault();
@@ -56,4 +56,15 @@ function displayResults(crimeDataResult, zillowDataResult) {
   }
 }
 
+// function readHistory() {
+//   var searchInput = localStorage.getItem('zipcodes');
+//   if (searchInput) {
+//     searchInput = JSON.parse(searchInput);
+//   } else {
+//     searchInput = [];
+//   }
+// }
 
+// function saveHistory(searchInput) {
+//   localStorage.setItem('zipcodes', JSON.stringify(searchInput))
+// }
