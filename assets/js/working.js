@@ -39,6 +39,7 @@ searchForm.addEventListener('submit', async function (event) {
       var zillowDataResult = await zillowDataResponse.json();
       console.log(zillowDataResult.searchResultsData[0])
       displayResults(crimeDataResult, zillowDataResult);
+      
     } catch (error) {
       console.error(error);
     }
